@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/@shevernitskiy/post-calculator?logo=npm&style=flat&labelColor=000)](https://www.npmjs.com/package/@shevernitskiy/post-calculator)
 [![JSR](https://jsr.io/badges/@shevernitskiy/post-calculator)](https://jsr.io/@shevernitskiy/post-calculator)
 ![dependencies](https://img.shields.io/badge/dependencies-0-green?style=flat&labelColor=000)
-[![license](https://img.shields.io/github/license/shevernitskiy/calculator?style=flat&labelColor=000)](https://github.com/shevernitskiy/post-calculator/blob/main/LICENSE)
+[![license](https://img.shields.io/github/license/shevernitskiy/post-calculator?style=flat&labelColor=000)](https://github.com/shevernitskiy/post-calculator/blob/main/LICENSE)
 
 This is super simple typed API client for RussianPost Calculator API.
 It just fetch calculator response from the API.
