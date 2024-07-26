@@ -42,6 +42,9 @@ const pakcage = {
   main: "./mod.js",
   types: "./mod.d.ts",
   keywords: ["russian post", "calculator", "api", "client", "typescript", "javascript", "deno", "nodejs", "node"],
+  peerDependencies: {
+    undici: "^6.19.4",
+  },
 };
 Deno.writeTextFileSync("./npm/package.json", JSON.stringify(pakcage, null, 2), { create: true });
 

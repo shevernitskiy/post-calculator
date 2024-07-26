@@ -572,7 +572,27 @@ export async function postCalculator<T extends PostCalcRequest>(params: T): Prom
     }
   }
 
-  const res = await fetch(`https://tariff.pochta.ru/v2/calculate/tariff/delivery?${query.join("&")}`);
+  // workaround form Node.js because of SSL error
+  let opts;
+
+  // @ts-ignore nodejs check
+  if (process?.release.name === "node") {
+    const { constants } = await import("node:crypto");
+    const { Agent } = await import("undici");
+    opts = {
+      // @ts-ignore undici has it
+      dispatcher: new Agent({
+        connect: {
+          rejectUnauthorized: false,
+          secureOptions: constants.SSL_OP_LEGACY_SERVER_CONNECT,
+        },
+      }),
+    };
+  } else {
+    opts = {};
+  }
+
+  const res = await fetch(`https://tariff.pochta.ru/v2/calculate/tariff/delivery?${query.join("&")}`, opts);
 
   if (params.format && params.format !== "json" && params.format !== "jsontext") {
     return res.text() as Promise<ReturnType<T>>;
