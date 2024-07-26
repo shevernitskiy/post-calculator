@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version"
+        required: true
+        type: string
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write # The OIDC ID token is used for authentication with JSR.
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+        with:
+          deno-version: v1.x
+
+      - name: Bump project verison
+        run: deno task version ${{ inputs.version }}
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9.1.4
+        with:
+          author_name: github-actions[bot]
+          author_email: 41898282+github-actions[bot]@users.noreply.github.com
+          message: "bump version"
+
+      - name: Publish to JSR
+        run: deno publish
+
+      - name: Build npm package
+        run: deno task npm ${{ inputs.version }}
+
+      - name: Publish to npm
+        run: |
+          cd npm
+          npm config set //registry.npmjs.org/:_authToken '${NPM_TOKEN}'
+          npm publish --access public
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: v${{ inputs.version }}
+          tag_name: v${{ inputs.version }}
+          generate_release_notes: true

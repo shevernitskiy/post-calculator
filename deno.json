@@ -1,0 +1,16 @@
+{
+  "name": "@shevernitskiy/post-calculator",
+  "version": "0.1.0",
+  "exports": "./mod.ts",
+  "lock": false,
+  "tasks": {
+    "npm": "deno run -A ./scripts/build-npm.ts",
+    "version": "deno run -A ./scripts/project-version.ts"
+  },
+  "fmt": {
+    "lineWidth": 100
+  },
+  "lint": {
+    "exclude": ["./npm/"]
+  }
+}
