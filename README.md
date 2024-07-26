@@ -28,7 +28,7 @@ deno add @shevernitskiy/post-calculator
 
 # Usage
 
-Create an instance and call method `tracking`. That's it.
+Call the `postCalculator` function with the required parameters (typed as well).
 
 ```ts
 import { postCalculator } from "@shevernitskiy/post-calculator";
@@ -43,7 +43,7 @@ const result = await postCalculator({
 // result will be typeof PostCalcResponse (typed json)
 
 const result2 = await postCalculator({
-  format: "html"
+  format: "html",
   object: 27030,
   from: 115211,
   to: 620000,
