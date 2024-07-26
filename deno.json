@@ -1,6 +1,6 @@
 {
   "name": "@shevernitskiy/post-calculator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "exports": "./mod.ts",
   "lock": false,
   "tasks": {
@@ -11,6 +11,8 @@
     "lineWidth": 100
   },
   "lint": {
-    "exclude": ["./npm/"]
+    "exclude": [
+      "./npm/"
+    ]
   }
 }
